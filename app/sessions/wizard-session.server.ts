@@ -11,13 +11,19 @@ export type OnboardingWizardSession = WizardSessionBase<"onboarding"> & {
   favoriteColor: string;
 };
 
-type WizardSession = OnboardingWizardSession;
+export type InviteFriendWizardSession = WizardSessionBase<"invite-friend"> & {
+  name: string;
+  firstName: string;
+  welcomeMessage: string;
+};
+
+type WizardSession = OnboardingWizardSession | InviteFriendWizardSession;
 
 const SESSION_KEY = "wizardSession";
 
 const sessionStorage = createCookieSessionStorage({
   cookie: {
-    name: "__publicationWizardSession",
+    name: "__wizardSession",
     httpOnly: true,
     path: "/wizard",
     sameSite: "lax",
